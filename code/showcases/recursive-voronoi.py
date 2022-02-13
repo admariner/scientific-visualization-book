@@ -198,10 +198,10 @@ def poly_random_points(V, n=10):
     xmin, xmax = V[:, 0].min(), V[:, 0].max()
     ymin, ymax = V[:, 1].min(), V[:, 1].max()
     xscale, yscale = xmax - xmin, ymax - ymin
-    if xscale > yscale:
-        xscale, yscale = 1, yscale / xscale
-    else:
-        xscale, yscale = xscale / yscale, 1
+    xscale, yscale = (
+        (1, yscale / xscale) if xscale > yscale else (xscale / yscale, 1)
+    )
+
     radius = 0.85 * np.sqrt(2 * xscale * yscale / (n * np.pi))
     points = blue_noise((xscale, yscale), radius)
     points = [xmin, ymin] + points * [xmax - xmin, ymax - ymin]
@@ -238,15 +238,13 @@ def voronoi(V, npoints, level, maxlevel, color=None):
     cells = []
     for region in regions:
         polygon = Polygon(vertices[region]).intersection(clip)
-        polygon = np.array([point for point in polygon.exterior.coords])
+        polygon = np.array(list(polygon.exterior.coords))
         linewidth = linewidths[level]
         edgecolor = edgecolors[level]
-        facecolor = "none"
         if level > 1:
             alpha = color[3] + (1 / (level + 1)) * 0.25 * np.random.uniform(-1, 0.5)
             color = color[0], color[1], color[2], min(max(alpha, 0.1), 1)
-        if level == maxlevel - 1:
-            facecolor = color
+        facecolor = color if level == maxlevel - 1 else "none"
         zorder = -level
         cells.append((polygon, linewidth, edgecolor, facecolor, zorder))
         cells.extend(voronoi(polygon, npoints, level + 1, maxlevel, color))

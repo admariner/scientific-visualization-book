@@ -36,9 +36,7 @@ for y, (name, colors) in enumerate(palettes.items()):
     ax.imshow(C, extent=[xmin, xmax, y + 0.025, y + 0.95])
     dx = (xmax - xmin) / len(colors)
     for i in range(len(colors)):
-        color = "white"
-        if colors[i] in ["1.0", "w"]:
-            color = "black"
+        color = "black" if colors[i] in ["1.0", "w"] else "white"
         text = str(colors[i]).replace(" ", "")
         ax.text(
             (i + 0.5) * dx,

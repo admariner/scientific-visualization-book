@@ -171,11 +171,7 @@ y -= 1
 # -----------------------------------------------------------------------------
 M = ["1", "2", "3", "4", "+", "x", "|", "_", 4, 5, 6, 7]
 for x, marker in zip(X, M):
-    if isinstance(marker, str):
-        text = '"%s"' % marker
-    else:
-        text = "%s" % marker
-
+    text = '"%s"' % marker if isinstance(marker, str) else "%s" % marker
     plt.scatter(x, y, s=256, color="black", marker="s", fc=".9", ec="none")
     plt.scatter(
         x, y, s=100, color="black", marker=marker, fc="none", ec="black", linewidth=0.75
@@ -208,11 +204,12 @@ for x, marker in zip(X, M):
         y,
         s=100,
         color="black",
-        marker="$" + marker + "$",
+        marker=f'${marker}$',
         fc="black",
         ec="none",
         linewidth=0.5,
     )
+
     ax.text(
         x,
         y - 0.25,

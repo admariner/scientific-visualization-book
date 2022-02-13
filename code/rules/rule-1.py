@@ -193,9 +193,9 @@ for label in axes_right.get_xticklabels():
 axes_right.get_xticklines()[1].set_markeredgewidth(0)
 plt.yticks([])
 
+H, h = 0.8, 0.55
 # Plot data
 for i in range(len(men_deaths)):
-    H, h = 0.8, 0.55
     # Death
     value = men_cases[i]
     p = patches.Rectangle(

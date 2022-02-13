@@ -37,7 +37,7 @@ def github_contrib(user, year):
     class HTMLParser(html.parser.HTMLParser):
         def handle_starttag(self, tag, attrs):
             if tag == "rect":
-                data = {key: value for (key, value) in attrs}
+                data = dict(attrs)
                 date = dateutil.parser.parse(data["data-date"])
                 count = int(data["data-count"])
                 day = date.timetuple().tm_yday - 1
