@@ -52,9 +52,7 @@ def gaussian(shape=(25, 25), width=0.5, center=0.0):
         width = (width,) * len(shape)
     if type(center) in [float, int]:
         center = (center,) * len(shape)
-    grid = []
-    for size in shape:
-        grid.append(slice(0, size))
+    grid = [slice(0, size) for size in shape]
     C = np.mgrid[tuple(grid)]
     R = np.zeros(shape)
     for i, size in enumerate(shape):

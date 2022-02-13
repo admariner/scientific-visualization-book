@@ -152,14 +152,13 @@ S = []
 vor = scipy.spatial.Voronoi(P)
 for i in range(len(vor.point_region)):
     region = vor.regions[vor.point_region[i]]
-    if not -1 in region:
+    if -1 not in region:
         verts = np.array([vor.vertices[i] for i in region])
         poly = shapely.geometry.Polygon(verts)
         H = 1.25 * D[i, 1] * hatch(h) + P[i]
         for i in range(len(H)):
             line = shapely.geometry.LineString(H[i])
-            intersect = poly.intersection(line)
-            if intersect:
+            if intersect := poly.intersection(line):
                 S.append(intersect.coords)
 
 # Grey background using thick lines
