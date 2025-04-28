@@ -159,11 +159,7 @@ for x0, x1, style in zip(X0, X1, styles):
         dash_capstyle="round",
         linewidth=3,
     )
-    if isinstance(style, str):
-        text = '"%s"' % style
-    else:
-        text = "%s" % str(style)
-
+    text = '"%s"' % style if isinstance(style, str) else "%s" % str(style)
     ax.text(
         (x0 + x1) / 2,
         y - 0.2,
