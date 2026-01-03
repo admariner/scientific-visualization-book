@@ -40,8 +40,8 @@ About this book
 
 This open access book has been written in reStructuredText_ converted to LaTeX
 using docutils and exported to Portable Document Format using XeLaTeX. Sources
-are available at `github.com/rougier/python-scientific-visualisation
-<https://github.com/rougier/python-scientific-visualisation>`_
+are available at `github.com/rougier/scientific-visualization-book
+<https://github.com/rougier/scientific-visualization-book>`_
 
 
 How to contribute
